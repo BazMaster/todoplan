@@ -1,0 +1,6 @@
+.idea
+/vendor
+node_modules
+composer.lock
+/files
+/public/Nginx_1.14_vhost.conf
