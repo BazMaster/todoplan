@@ -5,17 +5,26 @@ use App\Models\Task;
 
 class MainController
 {
-	public static function defaultAction()
+	public static function showAction()
 	{
 		$content = Task::find();
 
-		render('template',array(
+		$output = render('template',array(
 			'title'		=> 'Добро пожаловать в TodoPlan',
-			'content'	=> $content
+			'content'	=> $content,
+			'tpl'  => '_main'
 		));
+
+		return $output;
 	}
-	public static function secondAction()
+	public static function addAction()
 	{
-		echo 'Hello from '.__METHOD__.'!';
+		if ($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {return "Это не ajax-запрос!";}
+
+		$result = array(
+			'type' => 'success',
+			'content' => $_POST,
+		);
+		print json_encode($result);
 	}
 }

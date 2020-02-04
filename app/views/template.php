@@ -18,46 +18,47 @@
 
 	<title><?= formatTitle($title) ?></title>
 
-	<!-- Bootstrap core CSS -->
-	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-
-	<!-- Custom styles for this template -->
-	<link href="/assets/css/css.css" rel="stylesheet">
+	<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+	<link href="/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="container">
-	<header class="blog-header py-3">
+	<header class="px-4">
 		<div class="row flex-nowrap justify-content-between align-items-center">
-			<div class="col-4 pt-1">
-				<a class="text-muted" href="#">Subscribe</a>
+			<div class="col-4 py-2">
+				<a href="/" class="logo">
+					<img src="/assets/img/logo.png" alt="">
+					<div class="animated shake d-none d-md-inline-block">
+						TodoPlan
+					</div>
+				</a>
 			</div>
-			<div class="col-4 text-center">
-				<a class="blog-header-logo text-dark" href="#">Large</a>
+			<div class="col-4 text-center site_name">
+				<strong>Удобный менеджер планов</strong>
 			</div>
 			<div class="col-4 d-flex justify-content-end align-items-center">
-				<a class="text-muted" href="#">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-				</a>
-				<a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+				<a class="btn btn-sm btn-outline-secondary" href="#">Войти</a>
 			</div>
 		</div>
 	</header>
+
+	<main role="main" class="container p-4">
+
+		<?php render($tpl, ['content' => $content])?>
+
+	</main>
+
 </div>
 
-<main role="main" class="container">
-	<?= print_r($content,1) ?>
-</main>
-
-<footer class="blog-footer">
+<footer>
 	<p>&copy; TodoPlan <?= date('Y') ?></p>
 	<p>
-		<a href="#">Back to top</a>
+		Created by <a href="https://github.com/BazMaster/todoplan" target="_blank">@BazMaster</a>
 	</p>
 </footer>
 
-<script src="/assets/js/jquery-3.4.1.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>

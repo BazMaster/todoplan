@@ -29,8 +29,11 @@ function render($template,$vars = array()){
 		
 	}
 	else {
-		include __DIR__ . "/views/$template.php";
+		if(!empty($template)) {
+			include __DIR__ . "/views/$template.php";
+		}
 	}
+	return true;
 }
 
 // Helper function for title formatting:

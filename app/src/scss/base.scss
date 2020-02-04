@@ -1,0 +1,54 @@
+@import "bootstrap";
+@import "~animate.css/animate.css";
+$bg-color: white;
+body {
+    background: $bg-color;
+    &>.container {
+        box-shadow: 0 0 5px #ccc;
+        padding: 0;
+        header {
+            border-bottom: 3px solid #3f7bc2;
+            .logo {
+                img {
+                    height: 50px;
+                    vertical-align: top;
+                }
+                div {
+                    font-weight: bold;
+                    color: #3f7bc2;
+                    font-size: 28px;
+                    display: inline-block;
+                    margin-top: 5px;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+            .site_name {
+                color: #3e3e54;
+                font-size: 18px;
+                text-transform: uppercase;
+            }
+        }
+        main {
+            .loading {
+                opacity: 0.5;
+            }
+        }
+    }
+    footer {
+        text-align: center;
+        background: #3e3e54;
+        padding: 40px;
+        color: #ccc;
+        a {
+            color: #c7cada;
+            border-bottom: 1px dashed #c7cada;
+            &:hover {
+                border-bottom: none;
+                text-decoration: none;
+                color: #1f92bf;
+            }
+        }
+    }
+}
