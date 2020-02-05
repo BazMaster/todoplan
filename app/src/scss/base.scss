@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import "~animate.css/animate.css";
+@import "~toastr/build/toastr.css";
 $bg-color: white;
 body {
     background: $bg-color;
@@ -49,6 +50,15 @@ body {
                 text-decoration: none;
                 color: #1f92bf;
             }
+        }
+    }
+}
+
+form {
+    input, textarea, .form-control {
+        border: 3px solid transparent;
+        &.error {
+            border: 3px solid brown;
         }
     }
 }
