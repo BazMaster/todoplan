@@ -17,6 +17,8 @@ try {
 
 	$capsule->setAsGlobal();
 	$capsule->bootEloquent();
+
+	session_start();
 }
 catch(PDOException $e) {
 	error_log($e->getMessage());

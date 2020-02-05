@@ -40,27 +40,34 @@
 			</div>
 			<div class="col-4 d-flex justify-content-end align-items-center">
 
-				<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
-						data-target="#loginModal">
-					Войти
-				</button>
+				<?php if(isset($_SESSION['login'])): ?>
+					<b><?=$_SESSION['login']?></b>
+					<a href="/logout" class="ml-2">
+						<i class="fas fa-sign-out-alt" title="Выйти" data-toggle="tooltip"></i>
+					</a>
+				<?php else: ?>
+					<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal"
+							data-target="#loginModal">
+						Войти
+					</button>
+				<?php endif; ?>
 
-				<!-- Modal -->
-				<form>
-					<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
-						 aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="loginModalLabel">
-										<i class="fas fa-user-shield"></i>
-										Авторизация
-									</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
+
+				<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+					 aria-hidden="true">
+					<div class="modal-dialog modal-sm" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="loginModalLabel">
+									<i class="fas fa-user-shield"></i>
+									Авторизация
+								</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form class="login-form" action="#" method="post">
 									<div class="form-group">
 										<label for="login_input">Логин</label>
 										<input type="text" name="login" class="form-control" id="login_input">
@@ -69,16 +76,12 @@
 										<label for="password_input">Пароль</label>
 										<input type="password" name="password" class="form-control" id="password_input">
 									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-											data-dismiss="modal">Закрыть</button>
-									<button type="submit" class="btn btn-primary">Войти</button>
-								</div>
+									<button type="submit" class="btn btn-primary btn-block mb-3">Войти</button>
+								</form>
 							</div>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</header>

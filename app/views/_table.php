@@ -8,7 +8,7 @@
 		<thead class="thead-dark">
 		<tr>
 			<th scope="col" class="text-center sort" data-sortby="id">
-				ID
+				<span>ID</span>
 				<?php if($content['sortby'] == 'id'): ?>
 					<?php if($content['sortdir'] == 'asc'): ?>
 						<i class="fas fa-sort-down" data-sortdir="desc"></i>
@@ -17,8 +17,8 @@
 					<?php endif; ?>
 				<?php endif; ?>
 			</th>
-			<th scope="col" class="sort" data-sortby="name">
-				Имя
+			<th scope="col" class="text-center sort" data-sortby="name">
+				<span>Имя</span>
 				<?php if($content['sortby'] == 'name'): ?>
 					<?php if($content['sortdir'] == 'asc'): ?>
 						<i class="fas fa-sort-down" data-sortdir="desc"></i>
@@ -27,8 +27,8 @@
 					<?php endif; ?>
 				<?php endif; ?>
 			</th>
-			<th scope="col" class="sort" data-sortby="email">
-				Email
+			<th scope="col" class="text-center sort" data-sortby="email">
+				<span>Email</span>
 				<?php if($content['sortby'] == 'email'): ?>
 					<?php if($content['sortdir'] == 'asc'): ?>
 						<i class="fas fa-sort-down" data-sortdir="desc"></i>
@@ -37,9 +37,9 @@
 					<?php endif; ?>
 				<?php endif; ?>
 			</th>
-			<th scope="col">Текст задачи</th>
-			<th scope="col" class="sort" data-sortby="status">
-				Статус
+			<th scope="col" class="text-center ">Текст задачи</th>
+			<th scope="col" class="text-center sort" data-sortby="status">
+				<span>Статус</span>
 				<?php if($content['sortby'] == 'status'): ?>
 					<?php if($content['sortdir'] == 'asc'): ?>
 						<i class="fas fa-sort-down" data-sortdir="desc"></i>
@@ -48,7 +48,9 @@
 					<?php endif; ?>
 				<?php endif; ?>
 			</th>
-			<th scope="col" class="text-right"></th>
+			<?php if(isset($_SESSION['login'])): ?>
+				<th scope="col" class="text-right"></th>
+			<?php endif; ?>
 		</tr>
 		</thead>
 		<tbody>
@@ -78,24 +80,20 @@
 						<div class="text-danger">не выполнена</div>
 					<?php endif; ?>
 				</td>
-				<td class="text-right">
-					<button type="button" class="btn btn-danger btn-sm btn-edit my-1"
-					        data-tooltip="tooltip" title="Редактировать"><i class="fas fa-pencil-alt"></i></button>
-				</td>
+				<?php if(isset($_SESSION['login'])): ?>
+					<td class="text-right">
+						<button type="button" class="btn btn-danger btn-sm btn-edit my-1"
+								data-tooltip="tooltip" title="Редактировать">
+							<i class="fas fa-pencil-alt"></i>
+						</button>
+					</td>
+				<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>
 		</tbody>
 	</table>
 
 	<?php if($content['count'] > $content['perPage']): ?>
-		Страниц: <?=$content['pages']?><br>
-		Страница: <?=$content['page']?><br>
-		perPage: <?=$content['perPage']?><br>
-		count: <?=$content['count']?><br>
-		prev: <?=$content['prev']?><br>
-		next: <?=$content['next']?><br>
-		sortby: <?=$content['sortby']?><br>
-		sortdir: <?=$content['sortdir']?><br>
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center" data-page="<?=$content['page']?>">
 				<li class="page-item<?php if($content['page'] == 1): ?> disabled<?php endif; ?>">
@@ -113,3 +111,9 @@
 <?php else: ?>
 	<div class="alert alert-secondary mt-3">Записей не найдено</div>
 <?php endif; ?>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+</script>
