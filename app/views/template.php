@@ -52,36 +52,6 @@
 					</button>
 				<?php endif; ?>
 
-
-				<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
-					 aria-hidden="true">
-					<div class="modal-dialog modal-sm" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="loginModalLabel">
-									<i class="fas fa-user-shield"></i>
-									Авторизация
-								</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form class="login-form" action="#" method="post">
-									<div class="form-group">
-										<label for="login_input">Логин</label>
-										<input type="text" name="login" class="form-control" id="login_input">
-									</div>
-									<div class="form-group">
-										<label for="password_input">Пароль</label>
-										<input type="password" name="password" class="form-control" id="password_input">
-									</div>
-									<button type="submit" class="btn btn-primary btn-block mb-3">Войти</button>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</header>
@@ -102,5 +72,49 @@
 </footer>
 
 <script src="/assets/js/main.js"></script>
+
+<?php if(isset($_SESSION['login'])): ?>
+	<form class="edit-form" action="#" method="post">
+		<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+			 aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+				</div>
+			</div>
+		</div>
+	</form>
+<?php else: ?>
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+		 aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="loginModalLabel">
+						<i class="fas fa-user-shield"></i>
+						Авторизация
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="login-form" action="#" method="post">
+						<div class="form-group">
+							<label for="login_input">Логин</label>
+							<input type="text" name="login" class="form-control" id="login_input">
+						</div>
+						<div class="form-group">
+							<label for="password_input">Пароль</label>
+							<input type="password" name="password" class="form-control" id="password_input">
+						</div>
+						<button type="submit" class="btn btn-primary btn-block mb-3">Войти</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
+
+
 </body>
 </html>

@@ -6,6 +6,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 	$r->addRoute('GET', '/', 'App\Controllers\MainController/showAction');
 	$r->addRoute('POST', '/add', 'App\Controllers\MainController/addAction');
 	$r->addRoute('POST', '/get[/{id:\d+}]', 'App\Controllers\MainController/getTable');
+	$r->addRoute('POST', '/get-task', 'App\Controllers\MainController/getTask');
+	$r->addRoute('POST', '/edit', 'App\Controllers\MainController/editTask');
 	$r->addRoute('POST', '/login', 'App\Controllers\LoginController/loginAction');
 	$r->addRoute('GET', '/logout', 'App\Controllers\LoginController/logoutAction');
 });

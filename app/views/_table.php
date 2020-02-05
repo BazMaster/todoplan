@@ -7,16 +7,6 @@
 	>
 		<thead class="thead-dark">
 		<tr>
-			<th scope="col" class="text-center sort" data-sortby="id">
-				<span>ID</span>
-				<?php if($content['sortby'] == 'id'): ?>
-					<?php if($content['sortdir'] == 'asc'): ?>
-						<i class="fas fa-sort-down" data-sortdir="desc"></i>
-					<?php else: ?>
-						<i class="fas fa-sort-up" data-sortdir="asc"></i>
-					<?php endif; ?>
-				<?php endif; ?>
-			</th>
 			<th scope="col" class="text-center sort" data-sortby="name">
 				<span>Имя</span>
 				<?php if($content['sortby'] == 'name'): ?>
@@ -37,7 +27,7 @@
 					<?php endif; ?>
 				<?php endif; ?>
 			</th>
-			<th scope="col" class="text-center ">Текст задачи</th>
+			<th scope="col">Текст задачи</th>
 			<th scope="col" class="text-center sort" data-sortby="status">
 				<span>Статус</span>
 				<?php if($content['sortby'] == 'status'): ?>
@@ -58,9 +48,8 @@
 		<?php foreach ($content['tasks'] as $row): ?>
 			<?php $idx++; ?>
 			<tr class="row-item" data-id="<?=$row->id?>">
-				<td class="text-center"><strong><?=$row->id?></strong></td>
-				<td><strong><?=$row->name?></strong></td>
-				<td><?=$row->email?></td>
+				<td class="text-center"><strong><?=$row->name?></strong></td>
+				<td class="text-center"><?=$row->email?></td>
 				<td>
 					<?=$row->description?>
 					<?php if($row->edited_by_admin == 1): ?>
@@ -73,7 +62,7 @@
 						</div>
 					<?php endif; ?>
 				</td>
-				<td>
+				<td class="text-center">
 					<?php if($row->status): ?>
 						<div class="text-success">выполнена</div>
 					<?php else: ?>
@@ -111,9 +100,3 @@
 <?php else: ?>
 	<div class="alert alert-secondary mt-3">Записей не найдено</div>
 <?php endif; ?>
-
-<script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    });
-</script>

@@ -17,7 +17,7 @@ class LoginController
 
 		$status = 'error';
 
-		$msg = 'Заполните все поля формы правильно';
+		$msg = 'Все поля обязательны для заполнения!';
 		if(empty($data['login'])) {
 			$errors[] = 'login';
 		}
@@ -35,7 +35,7 @@ class LoginController
 				$msg = 'Авторизация прошла успешно!';
 			}
 			else {
-				$msg = 'Такого пользователя не существует!';
+				$msg = 'Неверный логин или пароль';
 			}
 		}
 

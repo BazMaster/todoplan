@@ -20,8 +20,6 @@ class MainController
 	}
 	public static function addAction()
 	{
-		if ($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {return "Это не ajax-запрос!";}
-
 		$data = array();
 		$content = array();
 		$output = '';
@@ -75,6 +73,85 @@ class MainController
 		));
 		$output = ob_get_clean();
 		return $output;
+	}
+
+	public static function getTask() {
+		if($_POST['id']) $id = $_POST['id'];
+		$output = $msg = '';
+		$status = 'error';
+
+		$task = Task::find($id);
+		if($task->id) {
+			ob_start();
+			$output = render('_task.edit',array(
+				'task'	=> $task,
+			));
+			$output = ob_get_clean();
+			$status = 'success';
+		}
+		else {
+			$msg = 'Задача не найдена!';
+		}
+
+		$result = array(
+			'status' => $status,
+			'data' => $task,
+			'output' => $output,
+			'msg' => $msg,
+		);
+		print json_encode($result);
+	}
+	public static function editTask() {
+		$data = array();
+		$content = array();
+		$output = '';
+		$errors = array();
+
+		if(isset($_SESSION['login'])) {
+			parse_str($_POST['data'], $data);
+
+			$task = Task::find($data['id']);
+			$status = 'success';
+			foreach($data as $key => $value) {
+				if(!empty($value)) {
+					$value = strip_tags($value);
+					$value = htmlentities($value, ENT_QUOTES, "UTF-8");
+					$value = htmlspecialchars($value, ENT_QUOTES);
+					$content[$key] = print_r($value,1);
+					if($key == 'description' && $value != $task->description) {
+						$task->edited_by_admin = 1;
+					}
+					$task->$key = $value;
+				} else {
+					$status = 'error';
+					$errors[] = $key;
+				}
+			}
+
+			if($status == 'success') {
+				if(empty($data['status'])) $task->status = '0';
+				$task->save();
+
+				$output = self::getTable($_POST['page']);
+
+				$msg = 'Задача успешно изменена';
+			}
+			else $msg = 'Заполните форму правильно';
+		}
+		else {
+			$status = 'login';
+			$msg = 'У вас недостаточно прав, чтобы сохранить эту задачу!';
+		}
+
+		$result = array(
+			'status' => $status,
+			'content' => $content,
+			'output' => $output,
+			'data' => $data,
+			'errors' => $errors,
+			'msg' => $msg,
+		);
+		print json_encode($result);
 	}
 
 	public static function getTasks($page = 1, $sortby = 'id', $sortdir = 'asc', $perPage = 3) {
