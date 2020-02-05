@@ -1,5 +1,5 @@
 [![GitHub CEO/SMI](https://img.shields.io/badge/developer-BazMaster-blue.svg)](https://github.com/BazMaster)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://mit-license.org/)
 
 ---
 
