@@ -1,6 +1,17 @@
 [![GitHub CEO/SMI](https://img.shields.io/badge/developer-BazMaster-blue.svg)](https://github.com/BazMaster)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+---
+
+Потрачено времени на реализацию: ~10 часов
+
+Ссылка на репозиторий: https://github.com/BazMaster/todoplan
+
+Ссылка на демо: https://todoplan.bazmaster.ru/
+
+-----
+
+
 ## Приложение-задачник
 
 Задачи состоят из:
@@ -48,14 +59,6 @@ mysql -uDB_USER -pDB_PASS -hDB_HOST DB_NAME < app/todoplan.sql
 
 Отредактировать доступы к БД в файле `app/config.php`
 
----
-
-Потрачено времени на реализацию: ~10 часов
-
-Ссылка на репозиторий: https://github.com/BazMaster/todoplan
-Ссылка на демо: https://todoplan.bazmaster.ru/
-
------
 
 ### Протокол тестирования, по которому проверяется задание:
 
