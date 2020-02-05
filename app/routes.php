@@ -5,6 +5,7 @@ use App\Controllers\MainController;
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
 	$r->addRoute('GET', '/', 'App\Controllers\MainController/showAction');
 	$r->addRoute('POST', '/add', 'App\Controllers\MainController/addAction');
+	$r->addRoute('POST', '/get[/{id:\d+}]', 'App\Controllers\MainController/getTable');
 });
 
 // Fetch method and URI from somewhere

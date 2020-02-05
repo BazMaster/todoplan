@@ -2,12 +2,13 @@
 namespace App\Controllers;
 
 use App\Models\Task;
+use Illuminate\Pagination\Paginator;
 
 class MainController
 {
 	public static function showAction()
 	{
-		$content = Task::all();
+		$content = self::getTasks();
 
 		$output = render('template',array(
 			'title'		=> 'Добро пожаловать в TodoPlan',
@@ -22,6 +23,10 @@ class MainController
 		if ($_SERVER['HTTP_X_REQUESTED_WITH'] != 'XMLHttpRequest') {return "Это не ajax-запрос!";}
 
 		$data = array();
+		$content = array();
+		$output = '';
+		$errors = array();
+
 		parse_str($_POST['data'], $data);
 
 		$task = new Task;
@@ -42,10 +47,7 @@ class MainController
 		if($status == 'success') {
 			$task->save();
 
-			$tasks = Task::all();
-			$output = render('_table',array(
-				'content'	=> $tasks,
-			));
+			$output = self::getTable($_POST['page']);
 
 			$msg = 'Задача успешно добавлена';
 		}
@@ -60,5 +62,39 @@ class MainController
 			'msg' => $msg,
 		);
 		print json_encode($result);
+	}
+
+	public static function getTable($page = 1, $sortby = 'id', $sortdir = 'asc') {
+		if($_POST['sortby']) $sortby = $_POST['sortby'];
+		if($_POST['sortdir']) $sortdir = $_POST['sortdir'];
+		if($_POST['page']) $page = $_POST['page'];
+		$tasks = self::getTasks($page, $sortby, $sortdir);
+		ob_start();
+		$output = render('_table',array(
+			'content'	=> $tasks,
+		));
+		$output = ob_get_clean();
+		return $output;
+	}
+
+	public static function getTasks($page = 1, $sortby = 'id', $sortdir = 'asc', $perPage = 3) {
+		$sortdir = mb_strtolower($sortdir);
+		$page = (int) str_replace('/get/', '', $page);
+		if($sortdir == 'asc') {
+			$descending = false;
+		} else {
+			$descending = true;
+		}
+		$output['tasks'] = Task::all()->sortBy($sortby, SORT_REGULAR, $descending)->forPage($page,$perPage);
+		$output['count'] = Task::all()->count();
+		$output['page'] = $page;
+		$output['perPage'] = $perPage;
+		$output['pages'] = $output['count'] / $perPage;
+		$output['prev'] = $page == 1 ? 1 : $page - 1;
+		$output['next'] = $page == $output['pages'] ? $page : $page + 1;
+		$output['sortby'] = $sortby;
+		$output['sortdir'] = $sortdir;
+
+		return $output;
 	}
 }

@@ -24,13 +24,13 @@ function render($template,$vars = array()){
 			$cl = strtolower(get_class($k));
 			$$cl = $k;
 			
-			include __DIR__ . "/views/_$cl.php";
+			return include __DIR__ . "/views/_$cl.php";
 		}
 		
 	}
 	else {
 		if(!empty($template)) {
-			include __DIR__ . "/views/$template.php";
+			return include __DIR__ . "/views/$template.php";
 		}
 	}
 	return true;

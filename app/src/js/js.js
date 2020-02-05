@@ -5,10 +5,11 @@ $(document).on('submit','.task-add', function(e){
     e.preventDefault();
     var $form = $(this);
     var data = $form.serialize();
+    var page = $('.pagination').data('page');
     // console.log(data);
     $('.output > *').addClass('loading');
     $form.find('.error').removeClass('error');
-    $.post('/add', { data: data }, function(result){
+    $.post('/add', { data: data, page: page }, function(result){
         console.log('result', result);
         if (result.status == 'success') {
             if(result.content) {
@@ -19,7 +20,6 @@ $(document).on('submit','.task-add', function(e){
                     toastr.success(result.msg);
                 }
             }
-            $('.output > *').removeClass('loading');
             $form[0].reset();
         }
         else {
@@ -32,6 +32,7 @@ $(document).on('submit','.task-add', function(e){
                 toastr.error(result.msg);
             }
         }
+        $('.output > *').removeClass('loading');
     },"json");
 });
 
@@ -49,3 +50,28 @@ $(document).on('click','.output .btn-edit', function(){
     //     },"json");
     // }
 });
+$(document).on('click','.pagination a', function(e){
+    e.preventDefault();
+    var sortby = $('.output .table').data('sortby');
+    var sortdir = $('.output .table').data('sortdir');
+    var page = $(this).attr('href');
+    console.log(sortby, sortdir, page);
+    $('.output > *').addClass('loading');
+    $.post(page, { sortby: sortby, sortdir: sortdir, page: page }, function(result){
+        $('.output').html(result);
+        $('.output > *').removeClass('loading');
+    });
+});
+$(document).on('click','.sort', function(e){
+    e.preventDefault();
+    var sortby = $(this).data('sortby');
+    var sortdir = $(this).find('i').data('sortdir');
+    var page = $('.output .table').data('page');
+    console.log(sortby, sortdir, page);
+    $('.output > *').addClass('loading');
+    $.post('get/' + page, { sortby: sortby, sortdir: sortdir, page: page }, function(result){
+        $('.output').html(result);
+        $('.output > *').removeClass('loading');
+    });
+});
+

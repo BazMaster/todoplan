@@ -1,4 +1,4 @@
-<form method="post" class="bg-warning mb-4 px-3 pt-3 task-add" id="form_members">
+<form method="post" class="bg-warning mb-1 px-3 pt-3 task-add" id="form_members">
 	<div class="form-row">
 		<div class="col-lg col-sm-6 mb-3">
 			<input type="text" class="form-control" placeholder="Имя" name="name">
