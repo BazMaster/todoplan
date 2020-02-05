@@ -1,18 +1,22 @@
 <?php
-/*
-	This file creates a new MySQL connection using the PDO class.
-	The login details are taken from config.php.
-*/
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 try {
-	$db = new PDO(
-		"mysql:host=$db_host;dbname=$db_name;charset=UTF8",
-		$db_user,
-		$db_pass
-	);
+	$capsule = new Capsule;
 
-	$db->query("SET NAMES 'utf8'");
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$capsule->addConnection([
+		'driver'    => 'mysql',
+		'host'      => $db_host,
+		'database'  => $db_name,
+		'username'  => $db_user,
+		'password'  => $db_pass,
+		'charset'   => 'utf8',
+		'collation' => 'utf8_unicode_ci',
+		'prefix'    => '',
+	]);
+
+	$capsule->setAsGlobal();
+	$capsule->bootEloquent();
 }
 catch(PDOException $e) {
 	error_log($e->getMessage());
