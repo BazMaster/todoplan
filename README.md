@@ -1,6 +1,7 @@
 [![GitHub CEO/SMI](https://img.shields.io/badge/developer-BazMaster-blue.svg)](https://github.com/BazMaster)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-##Приложение-задачник
+## Приложение-задачник
 
 Задачи состоят из:
 
